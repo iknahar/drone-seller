@@ -7,6 +7,7 @@ import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import Products from './Pages/Products/Products';
 import Naviagation from './Pages/Shared/Naviagation/Naviagation';
 import AddProducts from './Pages/AddProducts/AddProducts';
+import Details from './Pages/Details/Details';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/addproducts">
             <AddProducts />
+            </Route>
+            <Route exact path="/products/:productId">
+            <Details></Details>
           </Route>
           <Route path="/">
             <Home />

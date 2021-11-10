@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Products = () => {
+const SixProduct = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch("http://localhost:5000/allProducts")
@@ -11,10 +11,9 @@ const Products = () => {
     console.log(products);
     return (
         <div>
-
-            <h3 className="text-center p-3"><b>All</b> <span className="text-primary"><b>Products</b></span></h3>
+            <h3 className="text-center p-3"><b>Our</b> <span className="text-primary"><b>Products</b></span></h3>
             <div className="row container-fluid mx-auto">
-                {products?.map((pd, index) => (
+                {products?.slice(0, 6).map((pd) => (
                     <div className="col-md-6 col-lg-4">
                         <div className="m-4 border border-light rounded shadow-lg bg-white rounded" style={{ width: '360px' }}>
                             <div className="">
@@ -35,4 +34,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default SixProduct;
