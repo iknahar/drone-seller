@@ -8,6 +8,9 @@ import Products from './Pages/Products/Products';
 import Naviagation from './Pages/Shared/Naviagation/Naviagation';
 import AddProducts from './Pages/AddProducts/AddProducts';
 import Details from './Pages/Details/Details';
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import MyOrders from './Pages/MyOders/MyOrders';
 
 
 function App() {
@@ -29,12 +32,18 @@ function App() {
           <Route path="/allproducts">
             <Products />
           </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/myOrder">
+            <MyOrders />
+          </Route>
           <Route path="/addproducts">
             <AddProducts />
             </Route>
-            <Route exact path="/products/:productId">
+            <PrivateRoute exact path="/products/:productId">
             <Details></Details>
-          </Route>
+          </PrivateRoute>
           <Route path="/">
             <Home />
           </Route>
