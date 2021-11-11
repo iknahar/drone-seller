@@ -9,6 +9,7 @@ import Naviagation from './Pages/Shared/Naviagation/Naviagation';
 import Details from './Pages/Details/Details';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import ManageOrder from './Pages/Dashboard/ManageAllOrders/ManageOrder';
 import AddProducts from './Pages/Dashboard/AddProducts/AddProducts';
 import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
 
@@ -37,6 +38,9 @@ function App() {
           </PrivateRoute>
           <Route path="/myOrder">
             <MyOrders />
+          </Route>
+          <Route path="/mgt">
+            <ManageOrder />
           </Route>
           <Route path="/addproducts">
             <AddProducts />

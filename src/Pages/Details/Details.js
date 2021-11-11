@@ -19,7 +19,7 @@ const Details = () => {
   const onSubmit = (data) => {
     data.email = user?.email;
     data.displayName = user?.displayName;
-    data.status = "pending";
+    data.status = "Pending";
     data.name = product?.name;
     data.image = product?.image;
     data.price = product?.price;

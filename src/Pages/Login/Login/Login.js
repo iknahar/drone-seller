@@ -8,7 +8,7 @@ import Naviagation from "../../Shared/Naviagation/Naviagation";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, loginUser, signInWithGoogle, isLoading, authError } = useAuth();
+  const { user, loginUser, isLoading, authError } = useAuth();
 
   const location = useLocation();
   const history = useHistory();

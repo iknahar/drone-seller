@@ -1,9 +1,10 @@
 import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 
-const ManageAllOrders = () => {
+const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
     const { register, handleSubmit } = useForm();
     const [status, setStatus] = useState("");
@@ -84,8 +85,8 @@ const ManageAllOrders = () => {
                                         <input type="submit" />
                                     </form></td>
                                     <td>
-                                        <Button style={{ width: '7vw' }} variant="danger" onClick={() => handleDelete(od._id)}
-                                            className="btn btn-danger" >Delete</Button>
+                                        <Link style={{ width: '7vw' }} variant="danger" onClick={() => handleDelete(od._id)}
+                                            className="btn btn-danger" >Delete</Link>
                                     </td>
                                 </tr>
                             )
@@ -97,4 +98,4 @@ const ManageAllOrders = () => {
     );
 };
 
-export default ManageAllOrders;
+export default ManageOrders;
