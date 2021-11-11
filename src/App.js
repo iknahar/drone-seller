@@ -6,11 +6,11 @@ import Register from './Pages/Login/Register/Register';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import Products from './Pages/Products/Products';
 import Naviagation from './Pages/Shared/Naviagation/Naviagation';
-import AddProducts from './Pages/AddProducts/AddProducts';
 import Details from './Pages/Details/Details';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
-import MyOrders from './Pages/MyOders/MyOrders';
+import AddProducts from './Pages/Dashboard/AddProducts/AddProducts';
+import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
 
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
           <Route path="/allproducts">
             <Products />
           </Route>
-          <Route path="/dashboard">
+          <PrivateRoute path="/dashboard">
             <Dashboard />
-          </Route>
+          </PrivateRoute>
           <Route path="/myOrder">
             <MyOrders />
           </Route>

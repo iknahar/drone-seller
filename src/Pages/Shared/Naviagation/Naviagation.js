@@ -40,7 +40,7 @@ const Naviagation = () => {
                 <NavLink style={navStyle} activeStyle={activeSty} to="/dashboard">
                   Dashboard
                 </NavLink>
-                <Button className="rounded-pill" onClick={logout}>Logout</Button>
+                <Button className="rounded-pill px-5" onClick={logout}>Logout</Button>
               </span>
             ) : (
               <NavLink

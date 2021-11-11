@@ -25,16 +25,14 @@ const Login = () => {
     e.preventDefault();
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithGoogle(location, history);
-  };
+  
   return (
     <div>
       <Naviagation></Naviagation>
       <Container>
         <Row className="d-flex align-items-center">
           <Col>
-            <h1 className="my-3">Login</h1>
+          <h3><b>Log</b> <span className="text-primary"><b>In</b></span></h3>
             <form onSubmit={handleLoginSubmit}>
               <input
                 className="my-3 p-1 w-75"
@@ -54,7 +52,7 @@ const Login = () => {
                 variant="standard"
               />
               <br />
-              <Button className="btn btn-info my-3" type="submit">
+              <Button className="rounded-pill px-5" type="submit">
                 Login
               </Button>
               <NavLink style={{ textDecoration: "none" }} to="/register">
@@ -66,10 +64,7 @@ const Login = () => {
               )}
               {authError && <Alert severity="error">{authError}</Alert>}
             </form>
-            <p>------------------------</p>
-            <Button onClick={handleGoogleSignIn} className="btn btn-info">
-              Google Sign In
-            </Button>
+            
           </Col>
           <Col>
             <img style={{ width: "100%" }} src={login} alt="" />

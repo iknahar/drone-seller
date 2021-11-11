@@ -23,8 +23,8 @@ const AddProducts = () => {
   return (
     <div>
       <div>
-        <h1 className="mt-5 text-center text-primary">Add A Product</h1>
-        <div className=" w-25 m-auto mt-5">
+      <h3 className="pt-3 mt-5 text-center "><b>Add a</b> <span className="text-primary"><b>Product</b></span></h3>
+        <div className=" w-50 m-auto mt-5">
           <div className=" ">
             <div className="">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +60,7 @@ const AddProducts = () => {
                 <input
                   type="submit"
                   value="Add"
-                  className="btn btn-info p-2 m-2 w-100"
+                  className="btn btn-primary rounded-pill p-2 m-2 mt-4 w-100"
                 />
               </form>
             </div>

@@ -5,7 +5,7 @@ import feat from '../../images/featured.png'
 
 const FeaturedProduct = () => {
     return (
-        <div style={{background: "#e9f0eb"}}>
+        <div>
             <Container className="p-5" >
                 <Row>
                     <Col className="col-lg-6 col-md-12 col-sm-12 col-12 ">

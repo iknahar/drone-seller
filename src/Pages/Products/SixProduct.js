@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import loadingGif from '../../images/loader.gif'
 
 const SixProduct = () => {
     const [products, setProducts] = useState([]);
@@ -12,6 +13,10 @@ const SixProduct = () => {
     return (
         <div>
             <h3 className="text-center p-3"><b>Our</b> <span className="text-primary"><b>Products</b></span></h3>
+            
+            {
+                products.length === 0 && <img  style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src={loadingGif} alt="Loading"/>
+            }
             <div className="row container-fluid mx-auto">
                 {products?.slice(0, 6).map((pd) => (
                     <div className="col-md-6 col-lg-4">

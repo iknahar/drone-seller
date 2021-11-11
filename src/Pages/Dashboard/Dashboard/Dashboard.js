@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-
+import { Switch, Route, useRouteMatch, NavLink } from "react-router-dom";
 import "./Dashboard.css";
-
-// import Review from "./../Review/Review";
-// import MyBookings from "./../MyBookings/MyBookings";
-// import MakeAdmin from "./../MakeAdmin/MakeAdmin";
-// import ManageServices from "./../ManageServices/ManageServices";
 import useAuth from "../../../hooks/useAuth";
-// import AddProducts from "../../AddProducts/AddProducts";
+import { Button } from "react-bootstrap";
+
+import Review from "../Reviews/Review";
+import MyBookings from "../MyOrders/MyOrders";
+import MakeAdmin from "../MakeAdmin/MakeAdmin";
+import ManageServices from "../ManageProduct/ManageProduct";
+import AddProducts from "../AddProducts/AddProducts";
+import Pay from './../Pay/Pay';
+import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
+
+
 
 const Dashbaord = () => {
   let { path, url } = useRouteMatch();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -26,68 +30,92 @@ const Dashbaord = () => {
         }
       });
   }, [user?.email]);
-  console.log(isAdmin);
-    return (
-      <div></div>
-    // <div>
-    //   <div className="dashboard-container ">
-    //     <div className="row">
-    //       <div className="col-md-3 ">
-    //         <div className="dashboard">
-    //           <h5>Dashboard</h5>
-    //           <Link to={`${url}`}>
-    //             <li className="dashboard-menu mt-5">Book</li>
-    //           </Link>
 
-    //           <Link to={`${url}/BookingList`}>
-    //             <li className="dashboard-menu mt-5">Booking list</li>
-    //           </Link>
 
-    //           <Link to={`${url}/review`}>
-    //             <li className="dashboard-menu mt-5">Review</li>
-    //           </Link>
-    //           <div className="admin-dashboard">
-    //             <li className="dashboard-menu mt-5">Orders list</li>
+  const activeSty = {
+    fontWeight: "bold",
+  };
 
-    //             {isAdmin && (
-    //               <Link to={`${url}/addProducts`}>
-    //                 <li className="dashboard-menu">Add Product</li>
-    //               </Link>
-    //             )}
-    //             <Link to={`${url}/makeAdmin`}>
-    //               <li className="dashboard-menu">Make Admin</li>
-    //             </Link>
-    //             <Link to={`${url}/manageServices`}>
-    //               <li className="dashboard-menu">Manage Service</li>
-    //             </Link>
-    //           </div>
-    //         </div>
-    //       </div>
-    //       <div className="col-md-9">
-    //         <Switch>
-    //           <Route exact path={path}>
-    //             <MyBookings></MyBookings>
-    //           </Route>
-    //           <Route exact path={`${path}/review`}>
-    //             <Review></Review>
-    //           </Route>
-    //           <Route exact path={`${path}/BookingList`}>
-    //             <MyBookings></MyBookings>
-    //           </Route>
-    //           <Route exact path={`${path}/makeAdmin`}>
-    //             <MakeAdmin></MakeAdmin>
-    //           </Route>
-    //           <Route exact path={`${path}/addProducts`}>
-    //             <AddProducts></AddProducts>
-    //           </Route>
-    //           <Route exact path={`${path}/manageServices`}>
-    //             <ManageServices></ManageServices>
-    //           </Route>
-    //         </Switch>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+  return (
+    <div>
+      <div className="dashboard-container overflow-hidden">
+        <div className="row">
+          <div className="col-md-3 pe-0 col-12">
+            <div className="dashboard ps-3">
+              <h5 className='pt-5 py-3'>Hello, {user.displayName}!</h5>
+              
+              {!isAdmin && (
+                <div>
+                  <NavLink to={`${url}/BookingList`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu mt-5 p-1 text-left"> 📦 My Orders</li>
+                  </NavLink>
+                  <NavLink to={`${url}/Pay`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu p-1 text-left"> 💵 Pay</li>
+                  </NavLink>
+
+                  <NavLink to={`${url}/review`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu  p-1 text-left"> ⭐ Review</li>
+                  </NavLink>
+                </div>)}
+
+              {isAdmin && (
+
+                <div>
+                  <NavLink to={`${url}/allOrders`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu p-1 text-left"> 🗃️ Manage All Orders</li>
+                  </NavLink>
+                  <NavLink to={`${url}/addProducts`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu p-1 text-left"> ➕ Add Product</li>
+                  </NavLink>
+                  <NavLink to={`${url}/manageServices`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu p-1 text-left"> 🚀 Manage Proucts</li>
+                  </NavLink>
+
+                  <NavLink to={`${url}/makeAdmin`} activeStyle={activeSty} className="text-light text-decoration-none">
+                    <li className="dashboard-menu p-1 text-left"> 💠 Make Admin</li>
+                  </NavLink>
+                </div>
+              )}
+              <Button className="rounded-pill mt-5 px-5 btn btn-danger" onClick={logout}>Logout</Button>
+            </div>
+          </div>
+
+
+          {/* ---------------Swithcing of the dashboard ---------------------- */}
+
+          <div className="col-md-9 me-auto">
+            <Switch>
+              <Route exact path={path}>
+              {isAdmin && (<ManageAllOrders></ManageAllOrders>)}
+              {!isAdmin && (<MyBookings></MyBookings>)}
+                
+              </Route>
+              <Route exact path={`${path}/review`}>
+                <Review></Review>
+              </Route>
+              <Route exact path={`${path}/pay`}>
+                <Pay></Pay>
+              </Route>
+              <Route exact path={`${path}/BookingList`}>
+                <MyBookings></MyBookings>
+              </Route>
+              <Route exact path={`${path}/makeAdmin`}>
+                <MakeAdmin></MakeAdmin>
+              </Route>
+              <Route exact path={`${path}/allOrders`}>
+                <ManageAllOrders></ManageAllOrders>
+              </Route>
+              <Route exact path={`${path}/addProducts`}>
+                <AddProducts></AddProducts>
+              </Route>
+              <Route exact path={`${path}/manageServices`}>
+                <ManageServices></ManageServices>
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

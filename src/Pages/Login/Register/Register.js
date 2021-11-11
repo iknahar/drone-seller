@@ -30,7 +30,7 @@ const Register = () => {
       <Naviagation></Naviagation>
       <Container>
         <Row>
-          <h1 className="my-3">Register</h1>
+        <h3><b>Sign</b> <span className="text-primary"><b>Up</b></span></h3>
           <Col>
             {!isLoading && (
               <form onSubmit={handleLoginSubmit}>
@@ -66,7 +66,7 @@ const Register = () => {
                   onBlur={handleOnBlur}
                 />
 
-                <Button className="w-75 my-3 p-1" type="submit">
+                <Button className="rounded-pill px-5" type="submit">
                   Register
                 </Button>
                 <NavLink style={{ textDecoration: "none" }} to="/login">
