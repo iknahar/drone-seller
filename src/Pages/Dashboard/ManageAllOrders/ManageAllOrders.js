@@ -7,7 +7,6 @@ const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
     const { register, handleSubmit } = useForm();
     const [orderId, setOrderId] = useState("");
-    const [status, setStatus] = useState("");
     const [reload, setReload] = useState(true);
 
     useEffect(() => {
@@ -30,9 +29,9 @@ const ManageAllOrders = () => {
             .then((result) => {
                 if (data.modifiedCount === 1) {
                     setReload(!reload);
-                  } else {
+                } else {
                     alert("Status Changed To Shipped!!");
-                  }
+                }
             });
 
     };
@@ -69,7 +68,7 @@ const ManageAllOrders = () => {
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '12vw' }}>Drone Name</td>
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '12vw' }}>Customer</td>
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '6vw' }}>Price</td>
-                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '25vw' }}>Status</td>
+                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Status</td>
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Action</td>
                         </tr>
                     </thead>
