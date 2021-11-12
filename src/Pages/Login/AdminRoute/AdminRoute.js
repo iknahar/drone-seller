@@ -8,21 +8,21 @@ const AdminRoute = ({ children, ...rest }) => {
     const [isAdmin, setIsAdmin] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/checkAdmin/${user?.email}`)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data[0]?.role === "admin") {
-              setIsAdmin(true);
-            } else {
-              setIsAdmin(false);
-            }
-          });
+        fetch(`https://fast-earth-44959.herokuapp.com/checkAdmin/${user?.email}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data[0]?.role === "admin") {
+                    setIsAdmin(true);
+                } else {
+                    setIsAdmin(false);
+                }
+            });
     }, []);
-    
+
     if (isLoading) { return <Spinner animation="grow" /> }
     console.log(isAdmin)
     return (
-        
+
         <Route
             {...rest}
             render={({ location }) =>

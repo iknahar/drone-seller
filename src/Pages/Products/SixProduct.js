@@ -5,16 +5,16 @@ import loadingGif from '../../images/loader.gif'
 const SixProduct = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/allProducts")
+        fetch("https://fast-earth-44959.herokuapp.com/allProducts")
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
     return (
         <div>
             <h3 className="text-center p-3"><b>Our</b> <span className="text-primary"><b>Products</b></span></h3>
-            
+
             {
-                products.length === 0 && <img  style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src={loadingGif} alt="Loading"/>
+                products.length === 0 && <img style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }} src={loadingGif} alt="Loading" />
             }
             <div className="row container-fluid mx-auto">
                 {products?.slice(0, 6).map((pd) => (

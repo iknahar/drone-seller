@@ -4,17 +4,17 @@ import { useForm } from "react-hook-form";
 
 const MakeAdmin = () => {
   const { register, handleSubmit } = useForm();
- 
+
 
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/makeAdmin", {
+    fetch("https://fast-earth-44959.herokuapp.com/makeAdmin", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount) { 
+        if (data.modifiedCount) {
           console.log("function entering here")
         }
       })

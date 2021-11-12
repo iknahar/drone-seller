@@ -11,13 +11,13 @@ const Review = () => {
   const MySwal = withReactContent(Swal);
   const onSubmit = (data) => {
     data.displayName = user?.displayName;
-    fetch("http://localhost:5000/addSReview", {
+    fetch("https://fast-earth-44959.herokuapp.com/addSReview", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) =>MySwal.fire({
+      .then((result) => MySwal.fire({
         position: 'top-end',
         icon: 'success',
         title: 'Thank you for your review',
@@ -27,9 +27,9 @@ const Review = () => {
   };
   return (
     <div>
-       <h3 className="pt-3 mt-5 text-center "><b>Give Us Your Valuable</b> <span className="text-primary"><b>Review</b></span></h3>
+      <h3 className="pt-3 mt-5 text-center "><b>Give Us Your Valuable</b> <span className="text-primary"><b>Review</b></span></h3>
       <form onSubmit={handleSubmit(onSubmit)} className="pt-3 text-center ">
-        
+
         <input
           className="input-field p-2 py-4 m-2 w-50"
           name="comments"
@@ -46,10 +46,10 @@ const Review = () => {
           placeholder="Give Us a Rating"
           {...register("rating", { required: true })}
         />
-        
+
         <br />
         <br />
-    
+
         <input
           className="submit-btn btn btn-primary rounded-pill p-2 m-2 w-50"
           type="submit"

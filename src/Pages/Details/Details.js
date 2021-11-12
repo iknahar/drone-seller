@@ -26,7 +26,7 @@ const Details = () => {
     data.name = product?.name;
     data.image = product?.image;
     data.price = product?.price;
-    fetch("http://localhost:5000/addOrders", {
+    fetch("https://fast-earth-44959.herokuapp.com/addOrders", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
@@ -39,11 +39,11 @@ const Details = () => {
         showConfirmButton: false,
         timer: 1500
       }));
-  
+
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/singleProduct/${productId}`)
+    fetch(`https://fast-earth-44959.herokuapp.com/singleProduct/${productId}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [productId]);
@@ -63,30 +63,30 @@ const Details = () => {
           <p className="w-100">Billing Email: {user?.email}</p>
           <p className="w-100">{product?.description}</p>
           <div className="formdiv">
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-            {...register("address")}
-            placeholder="Enter Your Address"
-            className="w-100 input-field"
-          />
-          <input
-            {...register("contact")}
-            placeholder="Enter Your Phone Number"
-            className="w-100 my-2 input-field"
-          />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                {...register("address")}
+                placeholder="Enter Your Address"
+                className="w-100 input-field"
+              />
+              <input
+                {...register("contact")}
+                placeholder="Enter Your Phone Number"
+                className="w-100 my-2 input-field"
+              />
 
-          {errors.exampleRequired && <span>This field is required</span>}
+              {errors.exampleRequired && <span>This field is required</span>}
 
-          <input
-            type="submit"
-            value="💳 Purchase"
-            className="btn btn-primary mt-2 py-3 rounded-0 w-100"
-          />
-        </form>
-      </div>
+              <input
+                type="submit"
+                value="💳 Purchase"
+                className="btn btn-primary mt-2 py-3 rounded-0 w-100"
+              />
+            </form>
+          </div>
         </div>
       </div>
-      
+
 
     </div>
   );

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const AddProducts = () => {
-//   const { user } = useAuth();
+  //   const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,7 +14,7 @@ const AddProducts = () => {
   const MySwal = withReactContent(Swal);
 
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/addProducts", {
+    fetch("https://fast-earth-44959.herokuapp.com/addProducts", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
@@ -31,7 +31,7 @@ const AddProducts = () => {
   return (
     <div>
       <div>
-      <h3 className="pt-3 mt-5 text-center "><b>Add a</b> <span className="text-primary"><b>Product</b></span></h3>
+        <h3 className="pt-3 mt-5 text-center "><b>Add a</b> <span className="text-primary"><b>Product</b></span></h3>
         <div className="w-50 m-auto mt-5">
           <div className=" ">
             <div className="">

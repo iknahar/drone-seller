@@ -8,7 +8,7 @@ const ManageProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allProducts`)
+    fetch(`https://fast-earth-44959.herokuapp.com/allProducts`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [products, user?.email]);
@@ -18,7 +18,7 @@ const ManageProducts = () => {
   function handleDelete(id) {
     const confirmation = window.confirm("Are you sure?");
     if (confirmation) {
-      fetch(`http://localhost:5000/pdelete/${id}`, {
+      fetch(`https://fast-earth-44959.herokuapp.com/pdelete/${id}`, {
         method: "delete",
       })
         .then((res) => res.json())
@@ -43,7 +43,7 @@ const ManageProducts = () => {
             <tr style={{ textAlign: 'center' }}>
               <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '10vw' }}>Image</td>
               <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '15vw' }}>Drone Name</td>
-              <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '45vw'}}>Description</td>
+              <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '45vw' }}>Description</td>
               <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '6vw' }}>Price</td>
               <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Action</td>
             </tr>

@@ -10,7 +10,7 @@ const ManageAllOrders = () => {
     const [reload, setReload] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allOrders`)
+        fetch(`https://fast-earth-44959.herokuapp.com/allOrders`)
             .then((res) => res.json())
             .then((data) => setOrders(data));
     }, [[reload]]);
@@ -20,7 +20,7 @@ const ManageAllOrders = () => {
     };
 
     const onSubmit = (data) => {
-        fetch(`http://localhost:5000/statusUpdate/${orderId}`, {
+        fetch(`https://fast-earth-44959.herokuapp.com/statusUpdate/${orderId}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
@@ -41,7 +41,7 @@ const ManageAllOrders = () => {
     function handleDelete(id) {
         const confirmation = window.confirm("Are you sure to delete!!");
         if (confirmation) {
-            fetch(`http://localhost:5000/delete/${id}`, {
+            fetch(`https://fast-earth-44959.herokuapp.com/delete/${id}`, {
                 method: "delete",
             })
                 .then((res) => res.json())

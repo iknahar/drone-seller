@@ -19,8 +19,8 @@ const useFirebase = () => {
     const registerUser = (email, password, name, history) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            hanldeUserInfoRegister(userCredential.user.email);
+            .then((userCredential) => {
+                hanldeUserInfoRegister(userCredential.user.email);
                 setAuthError('');
                 const newUser = { email, displayName: name };
                 setUser(newUser);
@@ -53,16 +53,16 @@ const useFirebase = () => {
     }
 
     const hanldeUserInfoRegister = (email) => {
-      fetch("http://localhost:5000/addUserInfo", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email }),
-      })
-        .then((res) => res.json())
-        .then((result) => console.log(result));
+        fetch("https://fast-earth-44959.herokuapp.com/addUserInfo", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ email }),
+        })
+            .then((res) => res.json())
+            .then((result) => console.log(result));
     };
 
-   
+
     // observer user state
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
@@ -91,7 +91,7 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-  
+
 
     return {
         user,
