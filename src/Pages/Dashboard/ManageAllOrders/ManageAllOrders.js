@@ -77,7 +77,8 @@ const ManageAllOrders = () => {
                                             onClick={() => handleOrderId(od?._id)}
                                             {...register("status")}
                                         >
-                                            <option value="Pending">Pending</option>
+                                            
+                                            <option defaultvalue={od.status} value="Pending">Pending</option>
                                             <option value="Approve">Approve</option>
                                             <option value="Done">Done</option>
                                         </select>

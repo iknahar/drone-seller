@@ -1,12 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 const Review = () => {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const { user } = useAuth();
-
+  const MySwal = withReactContent(Swal);
   const onSubmit = (data) => {
     data.displayName = user?.displayName;
     fetch("http://localhost:5000/addSReview", {
@@ -15,9 +17,13 @@ const Review = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
-
-    console.log(data);
+      .then((result) =>MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Thank you for your review',
+        showConfirmButton: false,
+        timer: 1500
+      }));;
   };
   return (
     <div>

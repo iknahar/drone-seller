@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from './../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+
 
 const Details = () => {
   const [product, setProduct] = useState({});
   const { user } = useAuth();
   const { productId } = useParams();
-  console.log(productId);
 
+  const MySwal = withReactContent(Swal);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -29,8 +32,14 @@ const Details = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
-    console.log(data);
+      .then((result) => MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Order Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      }));
+  
   };
 
   useEffect(() => {

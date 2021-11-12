@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 // import useAuth from './../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const AddProducts = () => {
 //   const { user } = useAuth();
@@ -9,6 +11,7 @@ const AddProducts = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const MySwal = withReactContent(Swal);
 
   const onSubmit = (data) => {
     fetch("http://localhost:5000/addProducts", {
@@ -17,14 +20,19 @@ const AddProducts = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
-    console.log(data);
+      .then((result) => MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Product Added Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      }));
   };
   return (
     <div>
       <div>
       <h3 className="pt-3 mt-5 text-center "><b>Add a</b> <span className="text-primary"><b>Product</b></span></h3>
-        <div className=" w-50 m-auto mt-5">
+        <div className="w-50 m-auto mt-5">
           <div className=" ">
             <div className="">
               <form onSubmit={handleSubmit(onSubmit)}>

@@ -9,7 +9,7 @@ const Products = () => {
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
-    console.log(products);
+
     return (
         <div>
 
@@ -18,7 +18,7 @@ const Products = () => {
                 products.length === 0 && <img  style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src={loadingGif} alt="Loading"/>
             }
             <div className="row container-fluid mx-auto">
-                {products?.map((pd, index) => (
+                {products?.map((pd) => (
                     <div className="col-md-6 col-lg-4">
                         <div className="m-4 border border-light rounded shadow-lg bg-white rounded" style={{ width: '360px' }}>
                             <div className="">

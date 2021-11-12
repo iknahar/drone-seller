@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+
+
+
 const MakeAdmin = () => {
   const { register, handleSubmit } = useForm();
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = (data) => {
     fetch("http://localhost:5000/makeAdmin", {
@@ -10,15 +15,19 @@ const MakeAdmin = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
-    console.log(data);
+      .then((result) => {
+        if (data.modifiedCount) {
+          console.log(data);
+          setSuccess(true);
+        }
+      })
   };
   return (
-    <div>
-      <h1>make admin</h1>
+    <div className="w-50 m-auto mt-5">
+      <h3 className="pt-3 mt-5 text-center "><b>Make</b> <span className="text-primary"><b>Admin</b></span></h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="input-field"
+          className="p-2 m-2 w-100 input-field"
           name="email"
           placeholder="Email"
           type="email"
@@ -27,11 +36,12 @@ const MakeAdmin = () => {
         <br />
 
         <input
-          className="submit-btn btn btn-danger mt-3"
+          className="btn btn-primary rounded-pill p-2 m-2 mt-4 w-100"
           type="submit"
-          value="make as Admin"
+          value="Make Admin"
         />
       </form>
+      {success && <Alert severity="success">Made Admin successfully!</Alert>}
     </div>
   );
 };

@@ -9,7 +9,6 @@ const SixProduct = () => {
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
-    console.log(products);
     return (
         <div>
             <h3 className="text-center p-3"><b>Our</b> <span className="text-primary"><b>Products</b></span></h3>
