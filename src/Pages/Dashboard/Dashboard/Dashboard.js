@@ -3,7 +3,6 @@ import { Switch, Route, useRouteMatch, NavLink } from "react-router-dom";
 import "./Dashboard.css";
 import useAuth from "../../../hooks/useAuth";
 import { Button } from "react-bootstrap";
-
 import Review from "../Reviews/Review";
 import MyBookings from "../MyOrders/MyOrders";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
@@ -11,7 +10,7 @@ import ManageServices from "../ManageProduct/ManageProduct";
 import AddProducts from "../AddProducts/AddProducts";
 import Pay from './../Pay/Pay';
 import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
-
+import AdminRoute from "../../Login/AdminRoute/AdminRoute";
 
 
 const Dashbaord = () => {
@@ -43,7 +42,7 @@ const Dashbaord = () => {
           <div className="col-md-3 pe-0 col-12">
             <div className="dashboard ps-3">
               <h5 className='pt-5 py-3'>Hello, {user.displayName}!</h5>
-              
+
               {!isAdmin && (
                 <div>
                   <NavLink to={`${url}/BookingList`} activeStyle={activeSty} className="text-light text-decoration-none">
@@ -86,9 +85,9 @@ const Dashbaord = () => {
           <div className="col-md-9 me-auto">
             <Switch>
               <Route exact path={path}>
-              {isAdmin && (<ManageAllOrders></ManageAllOrders>)}
-              {!isAdmin && (<MyBookings></MyBookings>)}
-                
+                {isAdmin && (<ManageAllOrders></ManageAllOrders>)}
+                {!isAdmin && (<MyBookings></MyBookings>)}
+
               </Route>
               <Route exact path={`${path}/review`}>
                 <Review></Review>
@@ -99,18 +98,18 @@ const Dashbaord = () => {
               <Route exact path={`${path}/BookingList`}>
                 <MyBookings></MyBookings>
               </Route>
-              <Route exact path={`${path}/makeAdmin`}>
+              <AdminRoute exact path={`${path}/makeAdmin`}>
                 <MakeAdmin></MakeAdmin>
-              </Route>
-              <Route exact path={`${path}/allOrders`}>
+              </AdminRoute>
+              <AdminRoute exact path={`${path}/allOrders`}>
                 <ManageAllOrders></ManageAllOrders>
-              </Route>
-              <Route exact path={`${path}/addProducts`}>
+              </AdminRoute>
+              <AdminRoute exact path={`${path}/addProducts`}>
                 <AddProducts></AddProducts>
-              </Route>
-              <Route exact path={`${path}/manageServices`}>
+              </AdminRoute>
+              <AdminRoute exact path={`${path}/manageServices`}>
                 <ManageServices></ManageServices>
-              </Route>
+              </AdminRoute>
             </Switch>
           </div>
         </div>
