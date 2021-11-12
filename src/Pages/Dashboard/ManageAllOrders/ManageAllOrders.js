@@ -6,29 +6,38 @@ import { useForm } from "react-hook-form";
 const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
     const { register, handleSubmit } = useForm();
-    const [status, setStatus] = useState("");
     const [orderId, setOrderId] = useState("");
+    const [status, setStatus] = useState("");
+    const [reload, setReload] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:5000/allOrders`)
             .then((res) => res.json())
             .then((data) => setOrders(data));
-    }, []);
+    }, [[reload]]);
 
     const handleOrderId = (id) => {
         setOrderId(id);
     };
 
     const onSubmit = (data) => {
-        console.log(data, orderId);
         fetch(`http://localhost:5000/statusUpdate/${orderId}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
         })
             .then((res) => res.json())
-            .then((result) => console.log(result));
+            .then((result) => {
+                if (data.modifiedCount === 1) {
+                    setReload(!reload);
+                  } else {
+                    alert("Status Changed To Shipped!!");
+                  }
+            });
+
     };
+
+
 
     function handleDelete(id) {
         const confirmation = window.confirm("Are you sure to delete!!");
@@ -56,11 +65,11 @@ const ManageAllOrders = () => {
                 <table className='table table-bordered table-hover'>
                     <thead>
                         <tr style={{ textAlign: 'center' }}>
-                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '10vw' }}>Image</td>
-                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '15vw' }}>Drone Name</td>
-                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '15vw' }}>Customer</td>
+                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Image</td>
+                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '12vw' }}>Drone Name</td>
+                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '12vw' }}>Customer</td>
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '6vw' }}>Price</td>
-                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Status</td>
+                            <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '25vw' }}>Status</td>
                             <td className="p-3 bg-dark text-white font-weight-normal" style={{ width: '8vw' }}>Action</td>
                         </tr>
                     </thead>
@@ -72,20 +81,19 @@ const ManageAllOrders = () => {
                                     <td>{od.name}</td>
                                     <td>{od.displayName}</td>
                                     <td>{od.price}</td>
-                                    <td><form onSubmit={handleSubmit(onSubmit)}>
-                                        <select
-                                            onClick={() => handleOrderId(od?._id)}
-                                            {...register("status")}
-                                        >
-                                            
-                                            <option defaultvalue={od.status} value="Pending">Pending</option>
-                                            <option value="Approve">Approve</option>
-                                            <option value="Done">Done</option>
-                                        </select>
-                                        <input type="submit" />
-                                    </form></td>
+                                    <td>{od.status}
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <input
+                                                onClick={() => handleOrderId(od?._id)}
+                                                {...register("status")}
+                                                type="submit"
+                                                value="Shipped"
+                                                className="mt-2 btn btn-outline-primary ms-1 btn-sm" />
+                                        </form>
+
+                                    </td>
                                     <td>
-                                        <Button style={{ width: '7vw' }} variant="danger" onClick={() => handleDelete(od._id)}
+                                        <Button style={{ width: '7vw' }} onClick={() => handleDelete(od._id)}
                                             className="btn btn-danger" >Delete</Button>
                                     </td>
                                 </tr>
