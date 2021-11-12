@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Alert } from "react-bootstrap";
+import React from "react";
+
 import { useForm } from "react-hook-form";
-
-
 
 const MakeAdmin = () => {
   const { register, handleSubmit } = useForm();
-  const [success, setSuccess] = useState(false);
+ 
 
   const onSubmit = (data) => {
     fetch("http://localhost:5000/makeAdmin", {
@@ -15,10 +13,9 @@ const MakeAdmin = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => {
-        if (data.modifiedCount) {
-          console.log(data);
-          setSuccess(true);
+      .then((data) => {
+        if (data.modifiedCount) { 
+          console.log("function entering here")
         }
       })
   };
@@ -41,7 +38,6 @@ const MakeAdmin = () => {
           value="Make Admin"
         />
       </form>
-      {success && <Alert severity="success">Made Admin successfully!</Alert>}
     </div>
   );
 };
